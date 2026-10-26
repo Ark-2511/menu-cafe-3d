@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Menu Cafe</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script
+    type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+</script>
+</head>
+<body>
+    <main id="app">
+        
+<section id="menu-screen" class="screen">
+    <div id="menu-container">
+        <img
+            id="menu-background"
+            src="assets/images/menu-background.png"
+            alt="Menu của quán cà phê"
+        >
+
+        <button
+            id="latte-button"
+            class="menu-hotspot"
+            type="button"
+            aria-label="Xem chi tiết Latte"
+        ></button>
+        
+        <button
+            id="matcha-button"
+            class="menu-hotspot"
+            type="button"
+            aria-label="Xem chi tiết Matcha latte"
+            data-drink="matcha"
+        ></button>
+
+        <button
+            id="kombucha-button"
+            class="menu-hotspot"
+            type="button"
+            aria-label="Xem chi tiết Kombucha chanh"
+            data-drink="kombucha"
+        ></button>
+
+        <button
+            id="choco-button"
+            class="menu-hotspot"
+            type="button"
+            aria-label="Xem chi tiết Choco nóng"
+            data-drink="choco"
+        ></button>
+
+        <button
+            id="coldbrew-button"
+            class="menu-hotspot"
+            type="button"
+            aria-label="Xem chi tiết Cold Brew"
+            data-drink="coldbrew"
+        ></button>
+
+        <button
+            id="find-your-drink-button"
+            type="button"
+            aria-label="Tìm ly dành cho bạn"
+        >
+            <img
+                src="assets/images/find-your-drink.png"
+                alt=""
+            >
+        </button>
+
+    </div>
+</section>
+<!-- MÀN HÌNH TÌM LY DÀNH CHO BẠN -->
+<section id="find-drink-screen" class="screen" hidden>
+    <div class="find-layout">
+
+        <!-- Phần câu hỏi bên trái -->
+        <div class="quiz-main">
+            <p id="quiz-eyebrow" class="quiz-eyebrow">
+                TÌM LY DÀNH CHO TÔI · CÂU 1 / 3
+            </p>
+
+            <h1 id="quiz-question" class="quiz-question">
+                Bạn thích vị nào hơn?
+            </h1>
+
+            <div id="quiz-options" class="quiz-options"></div>
+
+            <div class="quiz-actions">
+                <button id="quiz-back-menu" class="quiz-button quiz-button-outline"
+                    type="button">
+                    Về Menu
+                </button>
+
+                <button id="quiz-next" class="quiz-button quiz-button-primary"
+                    type="button" disabled>
+                    Tiếp tục
+                </button>
+            </div>
+        </div>
+
+        <!-- Bảng các bước bên phải -->
+        <aside class="quiz-sidebar">
+            <p class="quiz-sidebar-heading">CÁC BƯỚC</p>
+
+            <div class="quiz-step">
+                <span class="quiz-step-number">1</span>
+                <div>
+                    <strong>Vị bạn thích</strong>
+                    <p>Chua · Đắng · Ngọt · Béo</p>
+                </div>
+            </div>
+
+            <div class="quiz-step">
+                <span class="quiz-step-number">2</span>
+                <div>
+                    <strong>Bạn cần gì lúc này</strong>
+                    <p>Tỉnh táo · Thư giãn</p>
+                </div>
+            </div>
+
+            <div class="quiz-step">
+                <span class="quiz-step-number">3</span>
+                <div>
+                    <strong>Nóng hay lạnh</strong>
+                    <p>Nóng · Lạnh · Sao cũng được</p>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+</section>
+
+<!-- MÀN HÌNH KẾT QUẢ TÌM LY -->
+<section id="find-result-screen" class="screen" hidden>
+    <div class="result-layout">
+        <div class="result-main">
+            <p class="quiz-eyebrow">GỢI Ý CHO BẠN</p>
+            <h1 class="result-heading">Ly dành cho bạn</h1>
+
+            <div class="result-card">
+                <div class="result-drink-image">
+                    <span>Ảnh đồ uống</span>
+                </div>
+
+                <div class="result-drink-info">
+                    <h2>Coldbrew</h2>
+                    <div class="result-tags">
+                        <span>Vị: Ngọt dịu</span>
+                        <span>Cần: Tỉnh táo</span>
+                        <span>Lạnh</span>
+                    </div>
+
+                    <p class="result-description">
+                        Một lựa chọn mát lạnh, đậm hương cà phê,
+                        phù hợp để nhâm nhi và tỉnh táo hơn.
+                    </p>
+
+                    <button id="result-detail-button"
+                        class="quiz-button quiz-button-primary"
+                        type="button">
+                        Xem chi tiết món
+                    </button>
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <button id="quiz-restart"
+                    class="quiz-button quiz-button-outline"
+                    type="button">
+                    Làm lại
+                </button>
+
+                <button id="result-back-menu"
+                    class="quiz-button quiz-button-outline"
+                    type="button">
+                    Về Menu
+                </button>
+            </div>
+        </div>
+
+        <aside class="result-sidebar">
+            <p class="quiz-sidebar-heading">CŨNG CÓ THỂ HỢP</p>
+
+            <div class="alternative-card">
+                <h3>Matcha latte</h3>
+                <p>Vị trà dịu nhẹ, thơm và dễ uống.</p>
+            </div>
+
+            <div class="alternative-card">
+                <h3>Kombucha chanh</h3>
+                <p>Chua thanh, tươi mát và sảng khoái.</p>
+            </div>
+
+            <p class="result-note">
+                Gợi ý chỉ để tham khảo. Ra quầy và nói tên ly với barista.
+            </p>
+        </aside>
+    </div>
+</section>
+<!-- Màn hình chi tiết đồ uống -->
+<section id="detail-screen" class="screen" hidden>
+
+    <!-- 1. Background -->
+    <img
+        id="detail-background"
+        class="detail-layer layer-background"
+        src="assets/images/coldbrew-background.png"
+        alt=""
+    >
+
+    <!-- 2. Ly Cold Brew -->
+    <img
+        id="drink-image"
+        class="detail-layer layer-drink"
+        src="assets/images/coldbrew-drink.png"
+        alt="Cold Brew"
+    >
+<model-viewer
+    id="latte-model"
+    class="detail-layer layer-drink-3d"
+    src="assets/models/latte-scene.glb"
+    alt="Latte 3D"
+    camera-controls
+    interaction-prompt="none"
+    shadow-intensity="1"
+    exposure="1"
+    camera-orbit="25deg 75deg 65%"
+    field-of-view="30deg">
+</model-viewer>
+    <!-- 3. Tên món và watermark -->
+    <img
+        id="drink-title-watermark"
+        class="detail-layer layer-title-watermark"
+        src="assets/images/coldbrew-title-watermark.png"
+        alt=""
+    >
+
+    <!-- 4. Bảng đánh giá và mô tả -->
+    <img
+        id="drink-notes-image"
+        class="detail-layer layer-notes"
+        src="assets/images/coldbrew-notes.png"
+        alt="Bảng đánh giá và mô tả Cold Brew"
+    >
+
+    <!-- 5. Hạt cà phê -->
+    <div id="floating-decorations">
+        <img
+            id="coffee-beans-image"
+            class="detail-layer layer-coffee-beans"
+            src="assets/images/coldbrew-coffee-beans.png"
+            alt=""
+        >
+    </div>
+
+    <!-- Nút quay về menu -->
+    <button
+        id="back-button"
+        type="button"
+        aria-label="Quay về menu chính"
+    ></button>
+
+</section>
+```html
+<!-- Màn hình Tìm ly dành cho bạn -->
+<section id="find-drink-screen" class="find-screen" hidden>
+    <div class="quiz-main">
+        <p id="quiz-eyebrow">TÌM LY DÀNH CHO TÔI · CÂU 1 / 3</p>
+        <h1 id="quiz-question">Bạn thích vị nào hơn?</h1>
+
+        <div id="quiz-options" class="quiz-options"></div>
+
+        <div class="quiz-buttons">
+            <button id="quiz-back-menu" type="button">Về Menu</button>
+            <button id="quiz-next" type="button" disabled>Tiếp tục</button>
+        </div>
+    </div>
+
+    <aside class="quiz-sidebar">
+        <p class="sidebar-heading">CÁC BƯỚC</p>
+
+        <div class="quiz-step active">
+            <span class="step-number">1</span>
+            <div>
+                <strong>Vị bạn thích</strong>
+                <p>Chua · Đắng · Ngọt · Béo</p>
+            </div>
+        </div>
+
+        <div class="quiz-step">
+            <span class="step-number">2</span>
+            <div>
+                <strong>Bạn cần gì lúc này</strong>
+                <p>Tỉnh táo · Thư giãn</p>
+            </div>
+        </div>
+
+        <div class="quiz-step">
+            <span class="step-number">3</span>
+            <div>
+                <strong>Nóng hay lạnh</strong>
+                <p>Nóng · Lạnh · Sao cũng được</p>
+            </div>
+        </div>
+    </aside>
+</section>
+
+<!-- Màn hình kết quả -->
+<section id="find-result-screen" class="find-screen result-screen" hidden>
+    <img
+        src="assets/images/find-drink-result.png"
+        alt="Kết quả gợi ý đồ uống"
+        class="result-image"
+    >
+
+    <div class="result-buttons">
+        <button id="quiz-restart" type="button">Làm lại</button>
+        <button id="result-back-menu" type="button">Về Menu</button>
+        <button id="result-detail-button" type="button">Xem chi tiết món</button>
+    </div>
+</section>
+```
+<!-- MÀN HÌNH TRẮC NGHIỆM TÌM LY -->
+<section id="find-drink-screen" class="screen" hidden>
+    <div class="quiz-layout">
+
+        <div class="quiz-main">
+            <p id="quiz-eyebrow">TÌM LY DÀNH CHO TÔI · CÂU 1 / 3</p>
+            <h1 id="quiz-question">Bạn thích vị nào hơn?</h1>
+
+            <div id="quiz-options" class="quiz-options">
+                <button class="quiz-option" type="button" data-answer="chua">
+                    <strong>Chua thanh</strong>
+                    <span>Sáng, nhẹ, có chút trái cây</span>
+                </button>
+
+                <button class="quiz-option" type="button" data-answer="dang">
+                    <strong>Đắng đậm</strong>
+                    <span>Mạnh, rõ vị cà phê</span>
+                </button>
+
+                <button class="quiz-option" type="button" data-answer="ngot">
+                    <strong>Ngọt dịu</strong>
+                    <span>Êm, ít đắng, dễ uống</span>
+                </button>
+
+                <button class="quiz-option" type="button" data-answer="beo">
+                    <strong>Béo mượt</strong>
+                    <span>Nhiều sữa, mượt ở vị giác</span>
+                </button>
+            </div>
+        </div>
+
+        <aside class="quiz-sidebar">
+            <p class="quiz-sidebar-title">CÁC BƯỚC</p>
+
+            <div class="quiz-step active" data-step="0">
+                <span class="step-number">1</span>
+                <div><strong>Vị bạn thích</strong><small>Chua · Đắng · Ngọt · Béo</small></div>
+            </div>
+
+            <div class="quiz-step" data-step="1">
+                <span class="step-number">2</span>
+                <div><strong>Bạn cần gì lúc này</strong><small>Tỉnh táo · Thư giãn</small></div>
+            </div>
+
+            <div class="quiz-step" data-step="2">
+                <span class="step-number">3</span>
+                <div><strong>Nóng hay lạnh</strong><small>Nóng · Lạnh · Sao cũng được</small></div>
+            </div>
+        </aside>
+
+        <div class="quiz-actions">
+            <button id="quiz-back-menu" class="outline-button" type="button">Về Menu</button>
+            <button id="quiz-next" class="gold-button" type="button" disabled>Tiếp tục</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- Màn hình kết quả Tìm ly dành cho bạn -->
+<section id="find-result-screen" hidden>
+    <img
+        id="find-result-image"
+        src="assets/images/find-result.png"
+        alt="Kết quả gợi ý đồ uống"
+    >
+
+    <button id="result-restart-image" type="button"
+        aria-label="Làm lại"></button>
+
+    <button id="result-back-menu-image" type="button"
+        aria-label="Về Menu"></button>
+</section>
+
+<!-- MÀN HÌNH KẾT QUẢ THỬ NGHIỆM -->
+<section id="find-result-screen" class="screen" hidden>
+    <div class="result-layout">
+
+        <div class="result-main">
+            <p class="result-eyebrow">GỢI Ý CHO BẠN</p>
+            <h1>Ly dành cho bạn</h1>
+
+            <article class="result-card">
+                <div class="result-drink-image">
+                    <img src="assets/images/coldbrew-drink.png" alt="Cold Brew">
+                </div>
+
+                <div class="result-details">
+                    <h2>Coldbrew</h2>
+
+                    <div class="result-tags">
+                        <span>Vị: Ngọt dịu</span>
+                        <span>Cần: Tỉnh táo</span>
+                        <span>Lạnh</span>
+                    </div>
+
+                    <div class="result-meter">
+                        <span>Độ đậm vị</span>
+                        <div><i style="width:80%"></i></div>
+                    </div>
+
+                    <div class="result-meter">
+                        <span>Độ ngọt</span>
+                        <div><i style="width:50%"></i></div>
+                    </div>
+
+                    <div class="result-meter">
+                        <span>Độ ngậy</span>
+                        <div><i class="cream-meter" style="width:25%"></i></div>
+                    </div>
+
+                    <div class="result-caffeine">
+                        <span>Caffeine</span>
+                        <strong>Cao</strong>
+                    </div>
+
+                    <button id="result-detail-button" class="gold-button" type="button">
+                        Xem chi tiết món
+                    </button>
+                </div>
+            </article>
+        </div>
+
+        <aside class="result-alternatives">
+            <p class="result-eyebrow">CŨNG CÓ THỂ HỢP</p>
+
+            <article class="alternative-card">
+                <h2>[Tên món 2]</h2>
+                <span>[Lý do ngắn]</span>
+            </article>
+
+            <article class="alternative-card">
+                <h2>[Tên món 3]</h2>
+                <span>[Lý do ngắn]</span>
+            </article>
+        </aside>
+
+        <div class="result-actions">
+            <button id="quiz-restart" class="outline-button" type="button">Làm lại</button>
+            <button id="result-back-menu" class="outline-button" type="button">Về Menu</button>
+        </div>
+
+        <p class="result-disclaimer">Gợi ý chỉ để tham khảo. Ra quầy và nói tên ly với barista.</p>
+    </div>
+</section>
+
+
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
